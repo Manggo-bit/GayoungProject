@@ -1,4 +1,5 @@
-# 2. GEMINI.md 작성 커밋 (아이패드 반응형 명시)
-git add GEMINI.md
-git commit -m "chore: Define project guidelines and iPad responsive requirements in GEMINI.md"
-git push origin main
+프로젝트 목표: "프로젝트의 명확한 문제 정의 및 해결 방안" $\rightarrow$ 사이버 보안 학습의 지루함을 해소하고 다마고치 육성 로직을 통해 동기 부여하는 해결 방안 명시.
+
+AI 활용 필수: **"프로젝트 선정(10점)**과 GitHub 관리(10점) 점수 확보" $\rightarrow$ **'Gemini CLI 필수 사용'**을 명시하며, 4단계 성장 로직 및 최종 펫 종류 결정(성장 분기)은 **AI 생성 콘텐츠(JSON)**에 의존한다고 명시.
+
+디자인 명시: 모바일 앱에 아이패드 기반을 넣어 달라는 요청을 반영하여, iPad Pro 11인치 가로 모드 최적화를 필수 요구사항으로 명시.
