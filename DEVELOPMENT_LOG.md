@@ -74,13 +74,19 @@ git push origin main
 # 2. AI 시나리오/퀴즈 콘텐츠 생성 함수 구현 (커밋 9-10)
 # ==============================================================================
 
-# 작업 내용: AI 기반 퀴즈 생성 함수 구현 및 JSON 키 통일 수정. (핵심 기능 2) [cite: 55]
+# 작업 내용: AI 기반 퀴즈 생성 함수 구현 및 JSON 키 통일 수정. (핵심 기능 2)
 
-# 프롬프트: "사용자가 선택한 난이도(Easy, Normal, Hard)에 따라 '윤리적 딜레마' 또는 '악성코드 대응' 시나리오를 작성해줘. 시나리오, 퀴즈(4지선다), 정답, 해설을 포함하는 JSON 포맷의 데이터를 반환하는 JavaScript 함수 코드를 작성해줘." [cite: 48]
+# 프롬프트: "사용자가 선택한 난이도(Easy, Normal, Hard)에 따라 '윤리적 딜레마' 또는 '악성코드 대응' 시나리오를 작성해줘. 시나리오, 퀴즈(4지선다), 정답, 해설을 포함하는 JSON 포맷의 데이터를 반환하는 JavaScript 함수 코드를 작성해줘."
 
 # ------------------------------------------------------------------------------
 
-# 9번 커밋: AI 퀴즈 콘텐츠 생성 로직 구현 (AI 활용 2회) [cite: 79]
+# 9번 커밋: AI 퀴즈 콘텐츠 생성 로직 구현 (AI 활용 2회)
 git add src/services/generateQuiz.js # 관련 파일 스테이징
 git commit -m "feat: Implement AI content generation for quiz scenarios (AI-assisted)"
+git push origin main
+
+# 10번 커밋: AI 코드 검증 및 JSON 키 통일 수정
+# 내용: AI가 생성한 JSON의 Key 이름이 통일되지 않아, 수동으로 'problem -> scenario', 'answer -> correctAnswer'로 통일 수정. [cite: 95]
+git add src/services/generateQuiz.js # 수정된 파일 스테이징
+git commit -m "fix: Standardize JSON key names for quiz data structure"
 git push origin main
