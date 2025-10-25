@@ -105,3 +105,9 @@ git push origin main
 git add src/components/PetImage.js src/assets/images # 관련 파일 스테이징
 git commit -m "feat: Add dynamic pet image component with import logic (AI-assisted)"
 git push origin main
+
+# 12번 커밋: iPad 가로 모드 UI 수정
+# 내용: AI가 생성한 컴포넌트를 iPad 가로 모드에서 중앙에 배치되도록 Tailwind CSS 클래스를 추가 수정.
+git add src/App.js # 수정된 파일 스테이징
+git commit -m "style: Optimize quiz view for iPad landscape central alignment"
+git push origin main
