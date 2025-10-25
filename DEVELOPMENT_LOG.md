@@ -63,3 +63,9 @@
 git add src/hooks/usePetData.js src/App.js # 관련 파일 스테이징
 git commit -m "feat: Implement pet growth state and CRUD hooks (AI-assisted)"
 git push origin main
+
+# 8번 커밋: AI 코드 검증 및 버그 수정
+# 내용: AI가 생성한 LocalStorage 초기화 로직에 try...catch 구문 누락 확인 및 수동 추가. [cite: 95]
+git add src/hooks/usePetData.js # 수정된 파일 스테이징
+git commit -m "fix: Add try-catch to LocalStorage hook for stability"
+git push origin main
