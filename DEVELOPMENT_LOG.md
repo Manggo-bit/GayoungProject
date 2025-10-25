@@ -90,3 +90,18 @@ git push origin main
 git add src/services/generateQuiz.js # 수정된 파일 스테이징
 git commit -m "fix: Standardize JSON key names for quiz data structure"
 git push origin main
+
+# ==============================================================================
+# 3. UI/UX 개선 및 이미지 경로 설정 (커밋 11-12)
+# ==============================================================================
+
+# 작업 내용: 펫 이미지 표시 컴포넌트 추가 및 퀴즈 풀이 화면 레이아웃 최적화.
+
+# 프롬프트: "React와 Tailwind CSS를 사용하여 펫의 현재 성장 단계(Egg, Hatch, Dragon)에 따라 다른 이미지를 표시하는 컴포넌트 코드를 생성해줘. 이미지는 src/assets/images/ 폴더에 있다고 가정하고, 파일 import 방법을 사용해줘." [cite: 48]
+
+# ------------------------------------------------------------------------------
+
+# 11번 커밋: 동적 펫 이미지 컴포넌트 구현 (AI 활용 3회)
+git add src/components/PetImage.js src/assets/images # 관련 파일 스테이징
+git commit -m "feat: Add dynamic pet image component with import logic (AI-assisted)"
+git push origin main
