@@ -111,3 +111,18 @@ git push origin main
 git add src/App.js # 수정된 파일 스테이징
 git commit -m "style: Optimize quiz view for iPad landscape central alignment"
 git push origin main
+
+# ==============================================================================
+# 4. 최종 펫 결정 로직 구현 및 마무리 (커밋 13-15)
+# ==============================================================================
+
+# 작업 내용: 최종 성장 펫 종류 결정 로직 구현 및 최종 문서화. (핵심 기능 3) [cite: 55]
+
+# 프롬프트: "사용자의 퀴즈 정답 유형이 '윤리적 딜레마'에 치우쳐 있다고 가정해줘. 이 데이터를 기반으로, 최종 성장할 펫의 종류 중 하나를 선택하고, 그 펫의 이름, 성격, 그리고 펫에게 어울리는 '윤리적 수호자'라는 별명을 포함하는 JSON 포맷의 데이터를 생성하는 JavaScript 함수 코드를 작성해줘." [cite: 48]
+
+# ------------------------------------------------------------------------------
+
+# 13번 커밋: 최종 펫 결정 로직 구현 (AI 활용 4회)
+git add src/services/finalPetLogic.js # 관련 파일 스테이징
+git commit -m "feat: Implement final pet type determination logic (AI-assisted)"
+git push origin main
