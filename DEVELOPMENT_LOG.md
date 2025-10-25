@@ -1,0 +1,44 @@
+# 개발 일지
+
+## 프로젝트 개요
+- 프로젝트명: **GayoungProject** (개인 맞춤형 To-Do 리스트 웹 애플리케이션)
+- 목표: Gemini CLI와 협업하여 React + Tailwind CSS 기반의 iPad 반응형 To-Do List 앱 개발.
+
+## 개발 과정
+
+### Week 1 (2025-10-26)
+
+#### Day 1 프로젝트 기획 및 환경 설정 (Git/GitHub & Gemini CLI)
+
+**작업 내용**:
+1.  **로컬 저장소 구축**: WSL(Ubuntu) 환경의 `home` 디렉터리 내에 `GayoungProject` 폴더 생성 및 Git 저장소 초기화 (`git init`).
+2.  **원격 저장소 연결**: GitHub 저장소 생성 및 로컬 저장소와 연결 (`git remote add origin`).
+3.  **필수 도구 설치**: Gemini CLI 설치 및 인증 완료.
+4.  **필수 문서 생성**: `GEMINI.md` 및 `DEVELOPMENT_LOG.md` 파일 생성 완료.
+
+**주요 도전 과제 및 해결 방법**:
+
+| 구분 | 문제 상황 | 해결 방법 및 AI 활용 |
+| :--- | :--- | :--- |
+| **저장소 위치** | WSL 내에서 새 폴더를 생성할 때 권한 문제가 발생했으나, VS Code의 WSL 연동 환경을 활용하여 해결함. | (AI 조언) Git 작업을 위해 최상위 폴더(`GayoungProject`) 자체를 저장소로 사용하는 것을 결정함. |
+| **GitHub 명칭** | 저장소 이름에 한글(`창의실무프로젝트`) 사용 불가 오류 발생. | (AI 조언) GitHub 규칙(ASCII 문자만 허용)에 따라 이름을 **`GayoungProject`** (영문)로 변경함. |
+| **URL 업데이트** | GitHub 이름 변경 후, 로컬 URL 업데이트 명령어 **`git remote set-url`** 구문 오류 발생. | (AI 조언) Git 버전의 사용법을 참고하여 올바른 구문을 사용하여 원격 주소 업데이트를 성공적으로 완료함. |
+| **Gemini 연동** | Gemini CLI 설치 후, 연동 성공 여부에 대한 확신 부족. | `gemini login` 명령 실행 후 **`Loaded cached credentials.`** 메시지를 확인하며 연동 성공을 확정함. |
+
+**Gemini CLI 사용 프롬프트**:
+* (현재까지는 Git 설정 및 문제 해결에 집중했으며, 코드 생성 프롬프트는 다음 일지부터 기록 예정입니다.)
+
+**결과 및 수정사항**:
+* 로컬 `master` 브랜치와 GitHub의 `GayoungProject` 저장소 연동 최종 완료.
+* **`GEMINI.md` 및 `DEVELOPMENT_LOG.md` 파일을 포함한 초기 프로젝트 구조 커밋 대기 중.**
+
+**학습 내용**:
+* Git/GitHub 저장소 이름은 **영문 및 특정 특수문자**만 허용됨을 학습함.
+* Git 명령어 오류 발생 시, `usage` 메시지 또는 AI의 도움을 받아 정확한 구문을 사용해야 함을 학습함.
+
+---
+
+## 바이브 코딩 활용 소감 (초기)
+
+- **AI와의 협업 경험**: Gemini CLI 설치 및 Git 환경 설정 과정에서 발생한 기술적 난제(GitHub 이름 규칙, Git 명령어 구문 오류)를 AI 조교(Gemini)와의 **구체적인 상호작용을 통해 신속하게 해결**할 수 있었음.
+- **개선이 필요한 부분**: 다음 단계부터는 **`GEMINI.md`** 가이드라인을 기반으로, AI를 활용한 **코드 생성 프롬프트**를 더욱 구체적으로 설계하는 것에 집중할 예정임.
