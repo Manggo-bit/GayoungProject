@@ -72,21 +72,23 @@ const MainLayout = () => {
     // 1. 퀴즈 횟수 증가
     await incrementQuizCount();
 
-    // 2. 펫 상태 업데이트 (기존 스탯에 새로운 스탯을 합산)
+    // 2. 최신 펫 정보 다시 가져오기
+    const currentPet = await getPet(PET_ID);
+
+    // 3. 펫 상태 업데이트 (기존 스탯에 새로운 스탯을 합산)
     const updatedPet = {
-      ...pet,
+      ...currentPet,
       stats: {
-        wisdom: pet.stats.wisdom + newStats.wisdom,
-        aggression: pet.stats.aggression + newStats.aggression,
+        wisdom: currentPet.stats.wisdom + newStats.wisdom,
+        aggression: currentPet.stats.aggression + newStats.aggression,
       },
     };
     await savePet(updatedPet);
     setPet(updatedPet); // UI 상태 업데이트
 
-    // 3. 퀴즈 화면 숨기기
+    // 4. 퀴즈 화면 숨기기
     setIsQuizVisible(false);
   };
-
   // 로딩 중 화면
   if (isLoading) {
     return (

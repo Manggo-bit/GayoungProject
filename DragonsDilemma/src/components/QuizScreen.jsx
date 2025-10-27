@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RpgButton from './RpgButton';
+import quizData from '../data/dilemmaContent.json';
 
-// A dummy quiz question. In a real app, this would come from a database or a service.
-const quizData = {
-  question: "A lost child is crying. What do you do?",
-  choices: [
-    {
-      text: "Help the child find their parents.",
-      stats: { wisdom: 1, aggression: 0 }
-    },
-    {
-      text: "Ignore the child and continue on your way.",
-      stats: { wisdom: -1, aggression: 1 }
-    }
-  ]
-};
+// To prevent showing the same quiz consecutively
+let lastQuizIndex = -1;
 
 const QuizScreen = ({ pet, onQuizComplete }) => {
-  const { question, choices } = quizData;
+  const [currentQuiz, setCurrentQuiz] = useState(null);
+
+  useEffect(() => {
+    let randomIndex;
+    if (quizData.length > 1) {
+      do {
+        randomIndex = Math.floor(Math.random() * quizData.length);
+      } while (randomIndex === lastQuizIndex);
+    } else {
+      randomIndex = 0;
+    }
+
+    lastQuizIndex = randomIndex;
+    setCurrentQuiz(quizData[randomIndex]);
+  }, []);
+
+  if (!currentQuiz) {
+    // You can render a loading state here
+    return <div>Loading quiz...</div>;
+  }
+
+  const { question, options, results } = currentQuiz;
 
   return (
     <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-around p-8 z-20">
@@ -42,9 +52,9 @@ const QuizScreen = ({ pet, onQuizComplete }) => {
       <div className="w-full max-w-3xl">
         <div className="bg-blue-500 text-white font-bold rounded-lg shadow-md border-b-4 border-blue-700 p-4">
           <div className="flex flex-wrap justify-center items-center gap-4">
-            {choices.map((choice, index) => (
-              <RpgButton key={index} onClick={() => onQuizComplete(choice.stats)}>
-                {choice.text}
+            {options.map((option, index) => (
+              <RpgButton key={index} onClick={() => onQuizComplete(results[index])}>
+                {option}
               </RpgButton>
             ))}
           </div>
