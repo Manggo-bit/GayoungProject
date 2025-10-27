@@ -51,10 +51,12 @@ export const useQuizLimit = (pet_id) => {
       let pet = await getPet(pet_id);
       if (pet) {
         const limit = getQuizLimitByPhase(pet.phase);
-        pet.quiz_count_today += 1;
-        await savePet(pet);
-        setQuizCountToday(pet.quiz_count_today);
-        setHasRemainingAttempts(pet.quiz_count_today < limit);
+        if (pet.quiz_count_today < limit) {
+          pet.quiz_count_today += 1;
+          await savePet(pet);
+          setQuizCountToday(pet.quiz_count_today);
+          setHasRemainingAttempts(pet.quiz_count_today < limit);
+        }
       }
     } catch (error) {
       console.error("Error incrementing quiz count:", error);
