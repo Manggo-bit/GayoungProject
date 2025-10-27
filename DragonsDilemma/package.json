@@ -2,9 +2,11 @@
   "name": "dragonsdilemma",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://love90230500.github.io/GayoungProject",
+
+  "homepage": "https://manggo-bit.github.io/GayoungProject/DragonsDilemma/",
   "main": "index.js",
   "type": "module",
+
   "scripts": {
     "dev": "vite",
     "build": "vite build",
