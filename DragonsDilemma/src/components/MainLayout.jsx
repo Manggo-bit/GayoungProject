@@ -100,11 +100,6 @@ const MainLayout = () => {
     return <QuizScreen pet={pet} onQuizComplete={handleQuizComplete} />;
   }
 
-  // 미니게임 화면이 활성화된 경우
-  if (isMiniGameVisible) {
-    return <MiniGameScreen pet={pet} onClose={() => setIsMiniGameVisible(false)} />;
-  }
-
   // 펫이 없을 때 (초기 상태)
   if (!pet) {
     return (
@@ -153,6 +148,9 @@ const MainLayout = () => {
           </div>
         </div>
       </div>
+
+      {/* 미니게임 모달 */}
+      {isMiniGameVisible && <MiniGameScreen pet={pet} onClose={() => setIsMiniGameVisible(false)} />}
     </div>
   );
 };
