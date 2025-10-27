@@ -653,4 +653,105 @@ day13 개발일지
   펫 타입이 무작위로 선택되는 기능이 구현되어 사용자 경험이 더욱 풍부해졌습니다. Gemini
   CLI의 도움으로 복잡한 배포 및 기능 구현 과정을 체계적이고 효율적으로 완료할 수 있었다.
 
-  
+  ########################################3
+  day14 개발일지
+
+  개발일지: 이미지 랜덤 업로드, 공격성 기반 난이도 조절 및 UI 이미지 적용
+
+  작업 내용
+   * 애플리케이션 시작 시 초기 펫 타입을 6가지 종류 중 무작위로 선택되도록 구현했습니다.
+   * 미니게임에서 펫의 공격성 수치가 낮을 때(특히 0일 때) 침투 성공 확률을 낮추는 게임 밸런스
+      조정을 진행했습니다.
+   * 버튼, 메인 화면 배경, 퀴즈 창 배경에 사용자 지정 UI 이미지를 적용하여 시각적 요소를
+     개선했습니다.
+
+  문제
+   1. 초기 펫 타입 고정: 게임 시작 시 펫이 항상 'cat' 타입으로 생성되어 다양성이 부족했습니다.
+   2. 미니게임 난이도 불균형: 펫의 공격성 수치가 0에 가까울 때도 미니게임의 승률이 예상보다
+      높아 난이도 조절이 필요했습니다.
+   3. UI 이미지 미적용: 애플리케이션의 버튼, 메인 배경, 퀴즈 창 등이 기본 스타일을 사용하여
+      시각적으로 단조로웠습니다.
+   4. 빌드 실패 (이미지 경로): UI 이미지 적용 후 빌드 과정에서 이미지 import 경로 문제로 인해
+      빌드가 실패하는 문제가 발생했습니다.
+
+  해결
+   1. 초기 펫 타입 랜덤화: src/components/MainLayout.jsx 파일의 createNewPet 함수에 펫 타입
+      목록을 정의하고, Math.random()을 사용하여 이 목록에서 무작위로 펫 타입을 선택하도록
+      로직을 추가했습니다.
+   2. 미니게임 난이도 조정: src/utils/miniGameLogic.js 파일의 playRockPaperScissors 함수에서
+      winChance의 기본값을 0.33에서 0.25로 낮춰, 낮은 공격성 수치에서의 승률을 감소시켰습니다.
+   3. UI 이미지 적용:
+       * src/components/RpgButton.jsx 파일에 btn_rpg_default.png와 btn_rpg_clicked.png 이미지를
+          import하고, 버튼의 className과 onMouseDown, onMouseUp, onMouseLeave 이벤트를 활용하여
+          기본 및 클릭 상태에 따라 배경 이미지를 적용했습니다.
+       * src/components/MainLayout.jsx 파일에 bg_grassland.png 이미지를 import하고, 메인
+         레이아웃의 최상위 div에 backgroundImage 스타일로 적용하여 배경을 설정했습니다.
+       * src/components/QuizScreen.jsx 파일에 ui_dialog_frame.png 이미지를 import하고, 퀴즈
+         질문 버블 div에 backgroundImage 스타일로 적용하여 질문 창 배경을 설정했습니다.
+   4. 빌드 실패 해결 (이미지 경로): MainLayout.jsx, RpgButton.jsx, QuizScreen.jsx 파일에서
+      이미지 import 시 발생한 경로 문제를 해결했습니다. import.meta.env.BASE_URL을 직접
+      사용하는 대신, ../../public/assets/ui/...와 같이 컴포넌트 파일 위치에서 public 폴더 내의
+       에셋으로 향하는 올바른 상대 경로를 사용하도록 수정했습니다.
+
+  Gemini CLI 사용 프롬프트 (주요 프롬프트)
+   * read_file 및 replace 명령어를 사용하여 src/utils/miniGameLogic.js,
+     src/components/RpgButton.jsx, src/components/MainLayout.jsx,
+     src/components/QuizScreen.jsx 파일의 내용을 확인하고 수정했습니다.
+   * run_shell_command 명령어를 통해 git status, git add, git commit, npm run deploy 등의 Git
+      및 배포 관련 작업을 수행했습니다.
+
+  결과 및 수정사항
+   * `src/components/MainLayout.jsx`: createNewPet 함수가 펫 타입 목록에서 무작위로 펫을
+     선택하도록 변경되었으며, bg_grassland.png가 메인 화면 배경으로 적용되었습니다.
+   * `src/utils/miniGameLogic.js`: playRockPaperScissors 함수의 winChance 계산식이 수정되어
+     낮은 공격성에서의 승률이 감소했습니다.
+   * `src/components/RpgButton.jsx`: btn_rpg_default.png와 btn_rpg_clicked.png 이미지가
+     버튼의 기본 및 클릭 상태에 따라 동적으로 적용되도록 스타일이 업데이트되었습니다.
+   * `src/components/QuizScreen.jsx`: ui_dialog_frame.png 이미지가 퀴즈 질문 버블의 배경으로
+     적용되었습니다.
+   * 이미지 import 경로: MainLayout.jsx, RpgButton.jsx, QuizScreen.jsx 내의 모든 이미지
+     import 경로가 ../../public/assets/ui/...와 같은 올바른 상대 경로로 수정되어 빌드 오류가
+     해결되었습니다.
+   * 최종 배포 결과: 모든 기능 구현 및 UI 개선 사항이 적용된 프로젝트가 GitHub Pages에
+     성공적으로 배포되었습니다.
+
+  학습 내용
+   * 게임 밸런싱: 게임의 특정 메커니즘(예: 미니게임 승률)을 조정할 때는 기존 로직을 면밀히
+     분석하고, 사용자 피드백을 바탕으로 수치적 조정을 통해 원하는 난이도를 구현하는 것이
+     중요합니다.
+   * UI/UX 구현: 커스텀 UI 이미지를 적용할 때는 이미지 import 방식, CSS background-image 속성
+      활용, 그리고 :active 상태와 같은 동적 UI 변화를 위한 이벤트 핸들링을 고려해야 합니다.
+   * Vite 에셋 처리: Vite 환경에서 컴포넌트 내의 이미지 에셋을 import할 때는
+     import.meta.env.BASE_URL을 직접 문자열 리터럴 내에 사용하는 것이 아니라, import image 
+     from '../path/to/image.png'와 같이 상대 경로로 import해야 Vite가 빌드 시 에셋을 올바르게
+      처리하고 BASE_URL을 자동으로 적용합니다.
+   * 디버깅 전략: 빌드 실패와 같은 복잡한 문제 발생 시, 오류 메시지를 정확히 분석하고 파일
+     구조를 다시 확인하여 경로 문제를 해결하는 반복적인 디버깅 과정이 필수적입니다.
+
+  주요 도전 과제 및 해결 방법
+
+  ┌─────┬──────────────────────────────┬───────────────────────────────────────────────────
+  ──┐
+  │ 구분 │ 문제 상황                    │ 해결 방법 및 AI 활용
+     │
+  ├─────┼──────────────────────────────┼───────────────────────────────────────────────────
+  ──┤
+  │ **초  │ 게임 시작 시 펫 타입이 항... │ MainLayout.jsx의 createNewPet 함수에 펫 타입
+  목...  │
+  │ **미  │ 공격성이 0일 때 미니게임 ... │ miniGameLogic.js에서 winChance의 기본값을
+  0.33에... │
+  │ **U   │ 버튼, 메인 배경, 퀴즈 창...  │ RpgButton.jsx, MainLayout.jsx, QuizScreen.jsx에
+  ... │
+  │ **빌  │ UI 이미지 적용 후 빌드 시... │ MainLayout.jsx, RpgButton.jsx, QuizScreen.jsx의
+  ... │
+  └─────┴──────────────────────────────┴───────────────────────────────────────────────────
+  ──┘
+
+
+  바이브 코딩 활용 소감
+  Gemini CLI는 이번 개발 과정에서 발생한 다양한 기술적 난관들을 해결하는 데 있어 매우
+  강력하고 효율적인 도구임을 다시 한번 입증했습니다. 특히, GitHub Pages 배포 설정의 복잡성,
+   Vite의 에셋 처리 방식에 대한 미묘한 이해 부족, 그리고 게임 로직의 밸런싱과 같은 문제들은 개발자가 직접 해결하기에 많은 시간과 노력이 소요될 수 있습니다. Gemini CLI는 이러한 문제들을 단계별로 분석하고, 코드 수정 제안, Git 명령 실행, 그리고 배포 과정까지 일관성 있게 지원하여 개발 흐름을 끊기지 않게 유지할 수 있도록 도왔습니다. 오류 메시지를 정확히 해석하고, 파일 구조를 기반으로 올바른 경로를 찾아내는 능력은 개발 생산성을 극대화하는 데 결정적인 역할을 했습니다.
+
+  최종 결과물 평가
+  최종 결과물은 사용자님의 모든 요구사항을 성공적으로 반영했습니다. 애플리케이션은 GitHub Pages에 안정적으로 배포되었으며, 초기 펫 타입 랜덤화, 공격성 기반 미니게임 난이도 조절,그리고 커스텀 UI 이미지 적용을 통해 사용자 경험이 크게 향상되었습니다. 시각적으로도 더욱 매력적인 게임으로 발전했으며, 기능적으로도 안정성을 확보했습니다. Gemini CLI의 체계적인 지원 덕분에 복잡한 요구사항들을 성공적으로 구현하고 만족스러운 최종 결과물을 도출할 수 있습니다.
