@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RpgButton from './RpgButton';
 import quizData from '../data/dilemmaContent.json';
+import dialogFrame from '${import.meta.env.BASE_URL}assets/ui/ui_dialog_frame.png';
 
 // To prevent showing the same quiz consecutively
 let lastQuizIndex = -1;
@@ -32,20 +33,11 @@ const QuizScreen = ({ pet, onQuizComplete }) => {
   return (
     <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-around p-8 z-20">
       {/* Question Bubble */}
-      <div className="relative max-w-2xl mx-auto">
-        <div className="bg-white text-black p-6 rounded-lg border-4 border-black shadow-lg">
-          <p className="text-center text-2xl font-bold">{question}</p>
-        </div>
-        {/* Bubble tail */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-0 h-0"
-          style={{
-            borderLeft: '20px solid transparent',
-            borderRight: '20px solid transparent',
-            borderTop: '20px solid black',
-            bottom: '-20px'
-          }}
-        ></div>
+      <div
+        className="relative max-w-2xl mx-auto p-6 bg-cover bg-center text-black flex items-center justify-center"
+        style={{ backgroundImage: `url(${dialogFrame})`, minHeight: '150px' }}
+      >
+        <p className="text-center text-2xl font-bold">{question}</p>
       </div>
 
       {/* Answer Frame */}

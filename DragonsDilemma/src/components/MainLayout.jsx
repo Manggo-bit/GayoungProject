@@ -5,6 +5,7 @@ import { useQuizLimit } from '../hooks/useQuizLimit';
 import QuizScreen from './QuizScreen'; // 퀴즈 화면 컴포넌트 임포트
 import PetDisplay from './PetDisplay';
 import MiniGameScreen from './MiniGameScreen'; // 미니게임 화면 컴포넌트 임포트
+import grasslandBg from '${import.meta.env.BASE_URL}assets/ui/bg_grassland.png';
 
 const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
 
@@ -122,7 +123,10 @@ const MainLayout = () => {
   // 펫이 없을 때 (초기 상태)
   if (!pet) {
     return (
-      <div className="flex w-screen h-screen bg-gray-800 text-white items-center justify-center">
+      <div
+        className="flex w-screen h-screen text-white items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: `url(${grasslandBg})` }}
+      >
         <RpgButton onClick={createNewPet}>
           첫 번째 펫 생성하기
         </RpgButton>
@@ -132,9 +136,12 @@ const MainLayout = () => {
 
   // 펫이 있을 때 (메인 화면)
   return (
-    <div className="flex w-screen h-screen bg-gray-800 text-white">
+    <div
+      className="flex w-screen h-screen text-white bg-cover bg-center"
+      style={{ backgroundImage: `url(${grasslandBg})` }}
+    >
       {/* 펫 표시 영역 */}
-      <div className="w-[60%] h-full bg-gray-700 flex items-center justify-center">
+      <div className="w-[60%] h-full flex items-center justify-center">
         <PetDisplay pet={pet} />
       </div>
 
