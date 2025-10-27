@@ -1,0 +1,22 @@
+
+> dragonsdilemma@1.0.0 predeploy
+> npm run build
+
+
+> dragonsdilemma@1.0.0 build
+> vite build
+
+vite v7.1.12 building for production...
+transforming...
+✓ 38 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.29 kB
+dist/assets/index-Y28xUmjW.css    2.51 kB │ gzip:  0.87 kB
+dist/assets/index-Cd996zd4.js   204.80 kB │ gzip: 64.97 kB
+✓ built in 1.42s
+
+> dragonsdilemma@1.0.0 deploy
+> gh-pages -d dist --verbose
+
+error: unknown option '--verbose'
