@@ -25,7 +25,7 @@ const getPetImageUrl = (pet) => {
     imageName = `${type}_p4_${finalEvolutionType}.png`;
   }
 
-  return `/assets/pets/phase${phase}/${imageName}`;
+  return `${import.meta.env.BASE_URL}assets/pets/phase${phase}/${imageName}`;
 };
 
 export default getPetImageUrl;
