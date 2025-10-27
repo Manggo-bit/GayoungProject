@@ -501,3 +501,30 @@ npm run dev # (캐시 무효화를 위해 npm run dev 명령 실행을 최종적
 #### 최종 결과물 평가 (Day 11 기준):\n 
 - **달성한 목표**: $\text{Day 1}$부터의 모든 개발 목표 달성. **$\text{CRUD}$ 로직, $\text{Stats}$ 기반 진화, $\text{AI}$ 콘텐츠, $\text{UI}$ 스타일링**의 모든 기능이 정상 작동하는 것을 최종 확인.\n 
 - **남은 작업**: 최종 $\text{Git}$ 커밋 및 $\text{GitHub}$ 제출.\n 
+
+#############################################
+
+
+# DEVELOPMENT_LOG.md 파일 내용 (Day 12 최종 점검 및 제출)
+
+#### Day 12 최종 점검: 이미지 경로 및 제출 완료\n\n
+**작업 내용:**\n
+문제: Day 11에서 로직 버그와 CSS 오류는 해결했으나, **배경 이미지(우주 배경) 및 UI 이미지(버튼, 말풍선)**가 최종적으로 웹 페이지에 로딩되지 않는 문제 발생.\n
+해결:\n
+1. **경로 문제 진단**: $\text{Tailwind CSS}$는 우주 배경을 $\text{CSS}$로 구현했으나, $\text{React}$가 **$\text{public/assets}$ 폴더**에 있는 $\text{UI}$ 이미지 파일(`btn_rpg_default.png`, `ui_dialog_frame.png`)을 코드에서 올바르게 참조하지 못하는 경로 오류를 진단.\n
+2. **최종 이미지 통합**: $\text{React}$ 코드에서 이미지를 로드하는 방식(`import` 또는 `/assets/...`)을 재점검하여 **모든 이미지 경로를 수정**하고, $\text{UI}$ 이미지가 $\text{QuizScreen}$에 정상적으로 나타나도록 코드를 수정함.\n
+3. **최종 Git 반영**: 모든 이미지 경로 수정 및 $\text{README.md}$에 최종 $\text{CSS}$ 오류 상황을 명시하고 $\text{Git}$에 기록함.\n\n
+
+**Gemini CLI 사용 프롬프트:**\n
+bash\n
+# Day 12 - UI 이미지 경로 최종 수정 요청 (문제 해결)\n
+gemini ask "src/components/QuizScreen.jsx 컴포넌트와 src/components/RpgButton.jsx 컴포넌트를 열어줘. 현재 UI 이미지(질문창, 답변창 프레임)가 로딩되지 않는 문제를 해결하기 위해, 모든 이미지 참조 경로를 public 폴더를 기준으로 올바르게 수정하고 파일을 저장해줘."\n
+\n\n
+
+**결과 및 수정사항:**\n
+1. $\text{QuizScreen.jsx}$ 및 $\text{RpgButton.jsx}$ 파일 내의 이미지 $\text{URL}$ 참조를 **$\text{Vite}$ 환경에 맞는 상대 경로** 또는 **절대 경로**로 수정하여 $\text{UI}$ 이미지 로딩 문제를 해결함.\n
+2. 모든 문제가 해결된 프로젝트 코드를 $\text{Git}$에 최종 커밋하고 $\text{GitHub}$에 푸시하여 제출을 완료함.\n\n
+
+#### 최종 결과물 평가 (Day 12 제출 완료):\n
+- **달성한 목표**: $\text{Day 1}$부터 $\text{Day 12}$까지의 모든 개발 목표 달성. **$\text{CRUD}$ 로직, $\text{Stats}$ 기반 진화, $\text{AI}$ 콘텐츠**의 정상 작동을 확인하고 최종 제출 완료.\n
+- **최종 기록**: 모든 $\text{Git}$ 브랜치와 커밋(15개 이상)이 체계적으로 $\text{GitHub}$에 기록됨.\n\n
