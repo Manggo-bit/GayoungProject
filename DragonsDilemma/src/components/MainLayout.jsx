@@ -7,7 +7,6 @@ import PetDisplay from './PetDisplay';
 import MiniGameScreen from './MiniGameScreen'; // 미니게임 화면 컴포넌트 임포트
 
 const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
-const MAX_QUIZ_ATTEMPTS = 5;
 
 const MainLayout = () => {
   const [pet, setPet] = useState(null);
@@ -20,6 +19,7 @@ const MainLayout = () => {
     isLoading: isQuizLimitLoading,
     hasRemainingAttempts,
     quizCountToday,
+    quizLimit,
     incrementQuizCount,
     refresh: refreshQuizLimit,
   } = useQuizLimit(pet ? PET_ID : null);
@@ -148,7 +148,7 @@ const MainLayout = () => {
             {isQuizLimitLoading ? (
               <p>퀴즈 횟수 확인 중...</p>
             ) : (
-              <p>오늘의 퀴즈 횟수: {quizCountToday} / {MAX_QUIZ_ATTEMPTS}</p>
+              <p>오늘의 퀴즈 횟수: {quizCountToday} / {quizLimit}</p>
             )}
           </div>
           <div className="mt-6">
