@@ -3,6 +3,7 @@ import RpgButton from './RpgButton';
 import { initDB, getPet, savePet } from '../data/db';
 import { useQuizLimit } from '../hooks/useQuizLimit';
 import QuizScreen from './QuizScreen'; // 퀴즈 화면 컴포넌트 임포트
+import MiniGameScreen from './MiniGameScreen'; // 미니게임 화면 컴포넌트 임포트
 
 const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
 const MAX_QUIZ_ATTEMPTS = 5;
@@ -11,6 +12,7 @@ const MainLayout = () => {
   const [pet, setPet] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isQuizVisible, setIsQuizVisible] = useState(false);
+  const [isMiniGameVisible, setIsMiniGameVisible] = useState(false); // 미니게임 화면 상태
 
   // 펫이 존재할 때만 useQuizLimit 훅을 활성화합니다.
   const {
@@ -98,6 +100,11 @@ const MainLayout = () => {
     return <QuizScreen pet={pet} onQuizComplete={handleQuizComplete} />;
   }
 
+  // 미니게임 화면이 활성화된 경우
+  if (isMiniGameVisible) {
+    return <MiniGameScreen pet={pet} onClose={() => setIsMiniGameVisible(false)} />;
+  }
+
   // 펫이 없을 때 (초기 상태)
   if (!pet) {
     return (
@@ -137,6 +144,11 @@ const MainLayout = () => {
           <div className="mt-6">
             <RpgButton onClick={() => setIsQuizVisible(true)} disabled={!hasRemainingAttempts}>
               {hasRemainingAttempts ? '퀴즈 시작' : '오늘 횟수 소진'}
+            </RpgButton>
+          </div>
+          <div className="mt-6">
+            <RpgButton onClick={() => setIsMiniGameVisible(true)}>
+              미니게임
             </RpgButton>
           </div>
         </div>
