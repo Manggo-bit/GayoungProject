@@ -2,21 +2,26 @@ import React, { useState, useEffect, useCallback } from 'react';
 import RpgButton from './RpgButton';
 import { initDB, getPet, savePet } from '../data/db';
 import { useQuizLimit } from '../hooks/useQuizLimit';
+import QuizScreen from './QuizScreen'; // 퀴즈 화면 컴포넌트 임포트
 
-const PET_ID = 1;
+const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
 const MAX_QUIZ_ATTEMPTS = 5;
 
 const MainLayout = () => {
   const [pet, setPet] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isQuizVisible, setIsQuizVisible] = useState(false);
 
-  // useQuizLimit hook is now conditional
-  const { 
-    isLoading: isQuizLimitLoading, 
-    hasRemainingAttempts, 
-    quizCountToday 
+  // 펫이 존재할 때만 useQuizLimit 훅을 활성화합니다.
+  const {
+    isLoading: isQuizLimitLoading,
+    hasRemainingAttempts,
+    quizCountToday,
+    incrementQuizCount,
+    refresh: refreshQuizLimit,
   } = useQuizLimit(pet ? PET_ID : null);
 
+  // 게임 데이터(펫 정보)를 로드하는 함수
   const loadGameData = useCallback(async () => {
     try {
       await initDB();
@@ -31,16 +36,18 @@ const MainLayout = () => {
     }
   }, []);
 
+  // 컴포넌트 마운트 시 게임 데이터를 로드합니다.
   useEffect(() => {
     loadGameData();
   }, [loadGameData]);
 
+  // 새로운 펫을 생성하는 함수
   const createNewPet = async () => {
     const newPet = {
       pet_id: PET_ID,
-      type: 'dragon',
-      phase: 1,
-      stats: { wisdom: 10, aggression: 10 },
+      type: 'dragon', // 초기 타입
+      phase: 1,       // 초기 진화 단계
+      stats: { wisdom: 10, aggression: 10 }, // 초기 스탯
       quiz_count_total: 0,
       quiz_count_today: 0,
       last_quiz_date: new Date().toISOString().slice(0, 10),
@@ -48,51 +55,88 @@ const MainLayout = () => {
     try {
       await savePet(newPet);
       setPet(newPet);
+      // 새 펫 생성 후 퀴즈 제한 상태를 즉시 갱신합니다.
+      await refreshQuizLimit();
     } catch (error) {
       console.error("Failed to create new pet:", error);
     }
   };
 
+  // 퀴즈 완료 시 호출될 함수
+  const handleQuizComplete = async (newStats) => {
+    if (!pet) return;
+
+    // 1. 퀴즈 횟수 증가
+    await incrementQuizCount();
+
+    // 2. 펫 상태 업데이트 (기존 스탯에 새로운 스탯을 합산)
+    const updatedPet = {
+      ...pet,
+      stats: {
+        wisdom: pet.stats.wisdom + newStats.wisdom,
+        aggression: pet.stats.aggression + newStats.aggression,
+      },
+    };
+    await savePet(updatedPet);
+    setPet(updatedPet); // UI 상태 업데이트
+
+    // 3. 퀴즈 화면 숨기기
+    setIsQuizVisible(false);
+  };
+
+  // 로딩 중 화면
   if (isLoading) {
-    return <div className="flex w-screen h-screen bg-gray-900 text-white items-center justify-center"><p className="text-3xl">Loading Game...</p></div>;
+    return (
+      <div className="flex w-screen h-screen bg-gray-900 text-white items-center justify-center">
+        <p className="text-3xl">게임 데이터 로딩 중...</p>
+      </div>
+    );
   }
 
+  // 퀴즈 화면이 활성화된 경우
+  if (isQuizVisible) {
+    return <QuizScreen pet={pet} onQuizComplete={handleQuizComplete} />;
+  }
+
+  // 펫이 없을 때 (초기 상태)
   if (!pet) {
     return (
       <div className="flex w-screen h-screen bg-gray-800 text-white items-center justify-center">
         <RpgButton onClick={createNewPet}>
-          Create Your First Pet
+          첫 번째 펫 생성하기
         </RpgButton>
       </div>
     );
   }
 
+  // 펫이 있을 때 (메인 화면)
   return (
     <div className="flex w-screen h-screen bg-gray-800 text-white">
-      {/* Pet Area (60%) */}
+      {/* 펫 표시 영역 */}
       <div className="w-[60%] h-full bg-gray-700 flex items-center justify-center">
-        <p className="text-2xl">Pet Area</p>
+        <p className="text-2xl">펫 영역 (진화 단계: {pet.phase})</p>
+        {/* 여기에 펫 이미지를 표시하는 컴포넌트를 추가할 수 있습니다. */}
       </div>
 
-      {/* UI Menu Area (40%) */}
+      {/* UI 메뉴 영역 */}
       <div className="w-[40%] h-full bg-gray-600 flex flex-col items-center justify-center p-8">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl font-bold mb-4">Pet Stats</h2>
+          <h2 className="text-3xl font-bold mb-4">펫 능력치</h2>
           <div className="text-xl">
-            <p>Wisdom: {pet.stats.wisdom}</p>
-            <p>Aggression: {pet.stats.aggression}</p>
+            <p>지혜: {pet.stats.wisdom}</p>
+            <p>공격성: {pet.stats.aggression}</p>
           </div>
           <div className="mt-6 text-xl">
-            <h3 className="text-2xl font-bold mb-2">Dilemma Quiz</h3>
+            <h3 className="text-2xl font-bold mb-2">딜레마 퀴즈</h3>
             {isQuizLimitLoading ? (
-              <p>Loading quiz attempts...</p>
+              <p>퀴즈 횟수 확인 중...</p>
             ) : (
-              <p>Today's Attempts: {quizCountToday} / {MAX_QUIZ_ATTEMPTS}</p>
+              <p>오늘의 퀴즈 횟수: {quizCountToday} / {MAX_QUIZ_ATTEMPTS}</p>
             )}
           </div>
           <div className="mt-6">
-            <RpgButton onClick={() => alert('Button Clicked!')} disabled={!hasRemainingAttempts}>
-              {hasRemainingAttempts ? 'Start Quiz' : 'No Attempts Left'}
+            <RpgButton onClick={() => setIsQuizVisible(true)} disabled={!hasRemainingAttempts}>
+              {hasRemainingAttempts ? '퀴즈 시작' : '오늘 횟수 소진'}
             </RpgButton>
           </div>
         </div>
