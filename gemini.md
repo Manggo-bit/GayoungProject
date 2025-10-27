@@ -93,3 +93,4 @@ gemini ask "우리 프로젝트의 딜레마 퀴즈용 콘텐츠 3개를 생성�
 
 # Day 7 - 프롬프트 8: 초기 데이터 로딩 및 UI 통합
 gemini ask "src/components/MainLayout.jsx 컴포넌트에 useQuizLimit 훅을 적용하고, IndexedDB에서 초기 펫 데이터를 로드하여 화면에 펫의 현재 Stats와 퀴즈 횟수를 표시하는 로직을 통합해줘. 초기 펫 데이터가 없으면, 새로운 펫을 생성(CRUD: Create)하는 버튼을 표시해야 해."
+
