@@ -48,7 +48,7 @@ const MainLayout = () => {
   const createNewPet = async () => {
     const newPet = {
       pet_id: PET_ID,
-      type: 'dragon', // 초기 타입
+      type: 'cat', // 초기 타입
       phase: 1,       // 초기 진화 단계
       stats: { wisdom: 10, aggression: 10 }, // 초기 스탯
       quiz_count_total: 0,

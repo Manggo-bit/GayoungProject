@@ -20,9 +20,9 @@ const QuizScreen = ({ pet, onQuizComplete }) => {
   const { question, choices } = quizData;
 
   return (
-    <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center p-8 z-20 gap-24">
+    <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-around p-8 z-20">
       {/* Question Bubble */}
-      <div className="relative max-w-2xl mx-auto mt-16">
+      <div className="relative max-w-2xl mx-auto">
         <div className="bg-white text-black p-6 rounded-lg border-4 border-black shadow-lg">
           <p className="text-center text-2xl font-bold">{question}</p>
         </div>
@@ -39,9 +39,9 @@ const QuizScreen = ({ pet, onQuizComplete }) => {
       </div>
 
       {/* Answer Frame */}
-      <div className="w-full max-w-3xl mb-16">
+      <div className="w-full max-w-3xl">
         <div className="bg-blue-500 text-white font-bold rounded-lg shadow-md border-b-4 border-blue-700 p-4">
-          <div className="flex justify-center items-center gap-4">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             {choices.map((choice, index) => (
               <RpgButton key={index} onClick={() => onQuizComplete(choice.stats)}>
                 {choice.text}
