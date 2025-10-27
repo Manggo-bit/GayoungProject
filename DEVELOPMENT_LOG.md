@@ -528,3 +528,129 @@ gemini ask "src/components/QuizScreen.jsx 컴포넌트와 src/components/RpgButt
 #### 최종 결과물 평가 (Day 12 제출 완료):\n
 - **달성한 목표**: $\text{Day 1}$부터 $\text{Day 12}$까지의 모든 개발 목표 달성. **$\text{CRUD}$ 로직, $\text{Stats}$ 기반 진화, $\text{AI}$ 콘텐츠**의 정상 작동을 확인하고 최종 제출 완료.\n
 - **최종 기록**: 모든 $\text{Git}$ 브랜치와 커밋(15개 이상)이 체계적으로 $\text{GitHub}$에 기록됨.\n\n
+
+#####################################3
+
+day13 개발일지
+
+개발일지: GitHub Pages 배포 및 초기 펫 랜덤화 기능 구현
+
+  작업 내용
+  Vite + React 기반의 웹 애플리케이션을 GitHub Pages에 배포하는 과정에서 발생한 문제들을
+  해결하고, 애플리케이션의 초기 펫 타입을 무작위로 설정하는 기능을 구현했습니다.
+
+  문제
+   1. GitHub Pages 배포 실패: 프로젝트를 GitHub Pages에 배포했을 때, index.html 파일이
+      로드되지 않거나 흰색 화면만 표시되는 문제가 발생했습니다. 이는 주로 GitHub Pages의 하위
+      디렉토리 배포 설정과 Vite 빌드 설정 간의 불일치 때문이었습니다.
+   2. 에셋(이미지, CSS, JS) 로딩 오류: 배포된 사이트에서 이미지를 포함한 여러 에셋들이
+      올바르게 로드되지 않아 사이트가 정상적으로 표시되지 않았습니다.
+   3. 초기 펫 타입 고정: 애플리케이션 시작 시 새로운 펫을 생성할 때, 펫의 타입이 항상
+      'cat'으로 고정되어 사용자 경험이 단조로웠습니다.
+
+  해결
+   1. GitHub Pages 설정 조정:
+       * vite.config.js 파일의 base 경로를 /GayoungProject/DragonsDilemma/로 수정하여 Vite
+         빌드 시 에셋 경로가 올바르게 생성되도록 했습니다.
+       * package.json 파일의 homepage URL을
+         https://manggo-bit.github.io/GayoungProject/DragonsDilemma로 수정하여 gh-pages 배포
+         도구가 올바른 대상 URL을 인식하도록 했습니다.
+       * package.json의 deploy 스크립트를 수정하여 dist 폴더의 내용을 gh-pages 브랜치의
+         DragonsDilemma 하위 폴더로 배포하도록 커스텀 스크립트를 작성했습니다.
+   2. 에셋 경로 수정:
+       * src/utils/getPetImageUrl.js 파일에서 이미지 URL을 생성할 때
+         import.meta.env.BASE_URL을 사용하여 동적으로 기본 경로를 포함하도록 수정했습니다.
+       * index.html 파일의 파비콘(vite.svg) href 속성을 절대 경로(/vite.svg)에서 상대
+         경로(./vite.svg)로 변경하여 올바르게 로드되도록 했습니다.
+   3. 초기 펫 타입 랜덤화:
+       * src/components/MainLayout.jsx 파일의 createNewPet 함수 내에서 펫 타입 목록(cat, owl,
+          platypus, unicorn, penguin, turtle)을 정의하고, Math.random()을 사용하여 이
+         목록에서 무작위로 하나의 타입을 선택하도록 로직을 추가했습니다.
+
+  Gemini CLI 사용 프롬프트 (주요 프롬프트)
+   * read_file(absolute_path = "/home/GayoungProject/DragonsDilemma/vite.config.js")
+   * replace(file_path = "/home/GayoungProject/DragonsDilemma/vite.config.js", instruction = 
+     "...", new_string = "...", old_string = "...")
+   * read_file(absolute_path = "/home/GayoungProject/DragonsDilemma/package.json")
+   * replace(file_path = "/home/GayoungProject/DragonsDilemma/package.json", instruction = 
+     "...", new_string = "...", old_string = "...")
+   * run_shell_command(command = "git status")
+   * run_shell_command(command = "git add package.json vite.config.js")
+   * run_shell_command(command = "git commit -m \"...\"")
+   * run_shell_command(command = "npm run deploy")
+   * read_file(absolute_path = 
+     "/home/GayoungProject/DragonsDilemma/src/utils/getPetImageUrl.js")
+   * replace(file_path = "/home/GayoungProject/DragonsDilemma/src/utils/getPetImageUrl.js", 
+     instruction = "...", new_string = "...", old_string = "...")
+   * read_file(absolute_path = "/home/GayoungProject/DragonsDilemma/index.html")
+   * replace(file_path = "/home/GayoungProject/DragonsDilemma/index.html", instruction = 
+     "...", new_string = "...", old_string = "...")
+   * read_file(absolute_path = 
+     "/home/GayoungProject/DragonsDilemma/src/components/MainLayout.jsx")
+   * replace(file_path = "/home/GayoungProject/DragonsDilemma/src/components/MainLayout.jsx",
+      instruction = "...", new_string = "...", old_string = "...")
+   * run_shell_command(command = "git push origin main")
+
+  결과 및 수정사항
+   * `vite.config.js`: base 경로가 /GayoungProject/DragonsDilemma/로 정확히 설정되었습니다.
+   * `package.json`: homepage URL이
+     https://manggo-bit.github.io/GayoungProject/DragonsDilemma로 수정되었고, deploy
+     스크립트가 하위 디렉토리 배포를 위한 커스텀 로직으로 변경되었습니다.
+   * `src/utils/getPetImageUrl.js`: 이미지 경로 생성 시 import.meta.env.BASE_URL을 사용하여
+     동적이고 올바른 경로를 참조하게 되었습니다.
+   * `index.html`: 파비콘 href가 ./vite.svg로 변경되어 하위 디렉토리 배포 환경에서도 올바르게
+      로드됩니다.
+   * `src/components/MainLayout.jsx`: createNewPet 함수가 6가지 펫 타입 중 하나를 무작위로
+     선택하여 초기 펫을 생성하도록 수정되었습니다.
+   * 최종 배포 결과: 프로젝트가 https://manggo-bit.github.io/GayoungProject/DragonsDilemma/에
+      성공적으로 배포되었으며, 모든 에셋이 정상적으로 로드되고 초기 펫 타입이 랜덤으로
+     설정됩니다.
+   * Git 커밋: 모든 변경 사항은 명확한 커밋 메시지와 함께 로컬 및 원격 저장소에
+     푸시되었습니다.
+
+  학습 내용
+   * GitHub Pages에 Vite 프로젝트를 하위 디렉토리로 배포할 때는 vite.config.js의 base 설정과
+     package.json의 homepage 설정이 매우 중요하며, 이 둘이 일관성을 유지해야 합니다.
+   * gh-pages 라이브러리는 기본적으로 대상 브랜치의 루트에 배포하므로, 하위 디렉토리 배포를
+     위해서는 deploy 스크립트 내에서 빌드 결과물을 원하는 하위 디렉토리 구조로 만든 후
+     배포해야 합니다.
+   * 정적 에셋(특히 public 폴더 외부의 에셋이나 index.html 내의 직접적인 링크)의 경로는
+     import.meta.env.BASE_URL을 사용하거나 상대 경로로 변경하여 하위 디렉토리 배포 환경에
+     맞게 조정해야 합니다.
+   * 애플리케이션의 초기 상태 설정 및 데이터 관리 로직(IndexedDB 사용)을 이해하는 것이 기능
+     구현에 필수적입니다.
+
+  주요 도전 과제 및 해결 방법
+
+  ┌───┬──────────────────────────┬─────────────────────────────────────────────────────────
+  ───┐
+  │ 구 │ 문제 상황                │ 해결 방법 및 AI 활용
+      │
+  ├───┼──────────────────────────┼─────────────────────────────────────────────────────────
+  ───┤
+  │ * │ Vite 프로젝트가 GitHu... │ vite.config.js의 base 경로와 package.json의 homepage
+  UR... │
+  │ * │ 배포 후 이미지, CSS, ... │ getPetImageUrl.js에서 이미지 경로에
+  `import.meta.env.BA... │
+  │ * │ 게임 시작 시 펫 타입...  │ MainLayout.jsx의 createNewPet 함수에서 펫 타입 목록을
+  ...  │
+  └───┴──────────────────────────┴─────────────────────────────────────────────────────────
+  ───┘
+
+
+  바이브 코딩 활용 소감
+  Gemini CLI는 이번 프로젝트에서 복잡한 배포 설정과 코드 수정 과정을 매우 효율적으로 진행할
+   수 있도록 도왔습니다. 특히 GitHub Pages 배포와 관련된 미묘한 설정 문제(base 경로,
+  homepage URL, gh-pages 스크립트 커스터마이징)를 단계별로 분석하고 정확한 수정 방안을
+  제시해 준 점이 인상 깊었습니다. 사용자의 모호한 설명에도 불구하고, 추가 질문을 통해
+  문제의 본질을 파악하고 해결책을 제시하는 능력이 탁월했습니다. 코드 변경 후 git 명령어를
+  통한 버전 관리까지 일관되게 처리하여 개발 흐름을 끊기지 않게 유지할 수 있었고, 이는 개발
+  생산성 향상에 크게 기여했습니다.
+
+  최종 결과물 평가
+  최종 결과물은 사용자님의 요구사항을 완벽하게 충족시켰습니다. 웹 애플리케이션은 GitHub
+  Pages에 성공적으로 배포되었고, 모든 에셋이 정상적으로 로드됩니다. 또한, 초기 펫 생성 시
+  펫 타입이 무작위로 선택되는 기능이 구현되어 사용자 경험이 더욱 풍부해졌습니다. Gemini
+  CLI의 도움으로 복잡한 배포 및 기능 구현 과정을 체계적이고 효율적으로 완료할 수 있었다.
+
+  
