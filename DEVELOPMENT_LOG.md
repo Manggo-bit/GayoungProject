@@ -315,3 +315,41 @@ gemini ask "React 프로젝트에서 \public/assets/pets\ 경로에 있는 픽�
 #### 최종 결과물 평가 (Day 7 기준):\n
 - **달성한 목표**: $\text{Stats}$ 기반 핵심 로직(진화, 미니 게임) 구현 완료, $\text{AI}$ 콘텐츠 생성 준비 완료, $\text{CRUD}$ 통합 완료. $\text{Day 7}$의 모든 프롬프트 실행 완료.\n
 - **남은 작업**: $\text{README.md}$ 작성 및 최종 검토. (Day 8 목표)\n
+
+###########################################
+
+# DEVELOPMENT_LOG.md 파일 내용 (Day 8 최종 정리)
+
+## Day 8 핵심 기능 3 구현 및 Git 브랜치 관리 시작\n\n
+
+**작업 내용:**\n
+문제: **핵심 기능 3**인 \펫 능력치 기반 미니 게임\의 $\text{UI}$와 로직 연결을 구현하고, 체계적인 $\text{Git}$ 브랜치 관리를 시작해야 함.\n
+해결:\n
+1. **Git 브랜치 시작**: $\text{Day 8}$ 작업을 위해 새로운 브랜치 **\feature/minigame-ui\**를 생성하고 이동함.\n
+2. **미니 게임 UI 구현**: $\text{MiniGameScreen.jsx}$ 컴포넌트를 생성하고, $\text{RpgButton}$ 및 픽셀 아트 스타일의 메시지 창을 사용하여 $\text{UI}$ 완성.\n
+3. **$\text{Stats}$ 통합**: $\text{MainLayout.jsx}$에서 $\text{IndexedDB}$를 통해 **Aggression Stats**를 로드하여 $\text{MiniGameScreen}$에 $\text{props}$로 전달하는 로직 구현.\n
+4. **개발일지 기록**: $\text{DEVELOPMENT\_LOG.md}$ 파일의 내용을 $\text{git stash/pop}$ 명령을 사용하여 **main 브랜치에 안전하게 저장**하여 이력 관리의 체계성을 확보함.\n\n
+
+**Gemini CLI 사용 프롬프트:**\n
+
+# Day 8 - 프롬프트 1: 미니 게임 UI 컴포넌트 생성\n
+gemini ask "src/components/MiniGameScreen.jsx 컴포넌트를 작성해줘. 이 화면은 펫의 Aggression Stats를 표시하고, \침투 시도\를 실행할 RpgButton 컴포넌트를 중앙에 배치해야 해. ..."\n
+# Day 8 - 프롬프트 2: MiniGameScreen 통합 및 화면 전환\n
+gemini ask "src/components/MainLayout.jsx 컴포넌트에 \미니 게임\ 버튼을 추가해줘. 이 버튼 클릭 시 MiniGameScreen 컴포넌트가 MainLayout 위에 모달처럼 표시되도록 화면 전환 로직을 구현해줘. ..."\n
+
+**결과 및 수정사항:**\n
+1. $\text{MiniGameScreen.jsx}$ 및 $\text{MainLayout.jsx}$ 통합 로직 구현 완료.\n
+2. $\text{DEVELOPMENT\_LOG.md}$를 $\text{main}$ 브랜치에 저장하기 위해 $\text{git stash push}$ → $\text{git checkout main}$ → $\text{git stash pop}$ 명령을 사용하여 **브랜치 간 파일 이동** 문제를 해결함.\n\n
+
+**학습 내용:**\n
+1. **$\text{Git}$ 브랜치 관리**: 기능 구현 작업(`feature/minigame-ui`)과 문서 작업(`main`)을 분리하여 관리하는 체계를 확립함.\n
+2. **$\text{git stash}$ 활용**: 작업 중인 브랜치에서 문서를 `main` 브랜치로 안전하게 옮겨 기록하는 방법을 습득하여 $\text{Git}$ 활용 숙련도를 높임.\n\n
+
+#### 주요 도전 과제 및 해결 방법\n
+| 구분 | 문제 상황 | 해결 방법 및 AI 활용 |\n
+|:---:|:---:|:---:|\n
+| **$\text{Git}$ 이력 관리** | 개발일지 기록이 기능 브랜치에 섞이는 문제 발생. | **$\text{git stash}$** 명령어를 사용하여 $\text{Day 8}$ 기록 내용을 임시 저장한 후, $\text{main}$ 브랜치로 이동하여 커밋하는 **브랜치 간 파일 이동 전략**을 사용. |\n\n
+
+#### 최종 결과물 평가 (Day 8 기준):\n
+- **달성한 목표**: 핵심 기능 3번 (미니 게임)의 $\text{UI}$ 및 $\text{Stats}$ 연결 로직 구현 완료. 체계적인 $\text{Git}$ 브랜치 관리 시작.\n
+- **남은 작업**: $\text{Git}$ 병합 및 $\text{README.md}$ 작성 (Day 9 목표).\n
