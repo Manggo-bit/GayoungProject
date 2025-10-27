@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RpgButton from './RpgButton';
 import quizData from '../data/dilemmaContent.json';
-import dialogFrame from '${import.meta.env.BASE_URL}assets/ui/ui_dialog_frame.png';
+import dialogFrame from '../assets/ui/ui_dialog_frame.png';
 
 // To prevent showing the same quiz consecutively
 let lastQuizIndex = -1;

@@ -1,6 +1,6 @@
 import React from 'react';
-import defaultBtn from '${import.meta.env.BASE_URL}assets/ui/btn_rpg_default.png';
-import clickedBtn from '${import.meta.env.BASE_URL}assets/ui/btn_rpg_clicked.png';
+import defaultBtn from '../assets/ui/btn_rpg_default.png';
+import clickedBtn from '../assets/ui/btn_rpg_clicked.png';
 
 const RpgButton = ({ children, onClick, disabled }) => {
   return (

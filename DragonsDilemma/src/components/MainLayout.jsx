@@ -5,7 +5,7 @@ import { useQuizLimit } from '../hooks/useQuizLimit';
 import QuizScreen from './QuizScreen'; // 퀴즈 화면 컴포넌트 임포트
 import PetDisplay from './PetDisplay';
 import MiniGameScreen from './MiniGameScreen'; // 미니게임 화면 컴포넌트 임포트
-import grasslandBg from '${import.meta.env.BASE_URL}assets/ui/bg_grassland.png';
+import grasslandBg from '../assets/ui/bg_grassland.png';
 
 const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
 
