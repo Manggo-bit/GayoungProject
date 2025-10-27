@@ -3,6 +3,7 @@ import RpgButton from './RpgButton';
 import { initDB, getPet, savePet } from '../data/db';
 import { useQuizLimit } from '../hooks/useQuizLimit';
 import QuizScreen from './QuizScreen'; // 퀴즈 화면 컴포넌트 임포트
+import PetDisplay from './PetDisplay';
 import MiniGameScreen from './MiniGameScreen'; // 미니게임 화면 컴포넌트 임포트
 
 const PET_ID = 1; // 앱에서는 단일 펫을 관리하므로 ID를 상수로 고정
@@ -116,8 +117,7 @@ const MainLayout = () => {
     <div className="flex w-screen h-screen bg-gray-800 text-white">
       {/* 펫 표시 영역 */}
       <div className="w-[60%] h-full bg-gray-700 flex items-center justify-center">
-        <p className="text-2xl">펫 영역 (진화 단계: {pet.phase})</p>
-        {/* 여기에 펫 이미지를 표시하는 컴포넌트를 추가할 수 있습니다. */}
+        <PetDisplay pet={pet} />
       </div>
 
       {/* UI 메뉴 영역 */}
