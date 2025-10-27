@@ -12,7 +12,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "mkdir -p temp-deploy/DragonsDilemma && cp -r dist/* temp-deploy/DragonsDilemma && gh-pages -d temp-deploy && rm -rf temp-deploy"
   },
   "keywords": [],
   "author": "",
