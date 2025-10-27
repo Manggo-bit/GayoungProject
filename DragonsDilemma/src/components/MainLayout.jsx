@@ -46,9 +46,12 @@ const MainLayout = () => {
 
   // 새로운 펫을 생성하는 함수
   const createNewPet = async () => {
+    const petTypes = ['cat', 'owl', 'platypus', 'unicorn', 'penguin', 'turtle'];
+    const randomPetType = petTypes[Math.floor(Math.random() * petTypes.length)];
+
     const newPet = {
       pet_id: PET_ID,
-      type: 'cat', // 초기 타입
+      type: randomPetType, // 초기 타입
       phase: 1,       // 초기 진화 단계
       stats: { wisdom: 10, aggression: 10 }, // 초기 스탯
       quiz_count_total: 0,
