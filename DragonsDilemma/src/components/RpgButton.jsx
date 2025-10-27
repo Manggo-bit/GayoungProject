@@ -1,10 +1,11 @@
 import React from 'react';
 
-const RpgButton = ({ children, onClick }) => {
+const RpgButton = ({ children, onClick, disabled }) => {
   return (
     <button
       onClick={onClick}
-      className="
+      disabled={disabled}
+      className={`
         px-6 py-2 
         bg-blue-500 
         text-white 
@@ -20,7 +21,8 @@ const RpgButton = ({ children, onClick }) => {
         transition-transform 
         duration-150 
         ease-in-out
-      "
+        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+      `}
     >
       {children}
     </button>

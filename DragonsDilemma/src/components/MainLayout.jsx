@@ -75,18 +75,31 @@ const MainLayout = () => {
     // 2. 최신 펫 정보 다시 가져오기
     const currentPet = await getPet(PET_ID);
 
-    // 3. 펫 상태 업데이트 (기존 스탯에 새로운 스탯을 합산)
+    // 3. 펫 상태 업데이트 (스탯, 전체 퀴즈 횟수)
     const updatedPet = {
       ...currentPet,
+      quiz_count_total: (currentPet.quiz_count_total || 0) + 1,
       stats: {
         wisdom: currentPet.stats.wisdom + newStats.wisdom,
         aggression: currentPet.stats.aggression + newStats.aggression,
       },
     };
+
+    // 4. 진화 로직 체크
+    const { phase, quiz_count_total } = updatedPet;
+    if (phase === 1 && quiz_count_total >= 3) {
+      updatedPet.phase = 2;
+    } else if (phase === 2 && quiz_count_total >= 7) {
+      updatedPet.phase = 3;
+    } else if (phase === 3 && quiz_count_total >= 12) {
+      updatedPet.phase = 4;
+    }
+
+    // 5. 업데이트된 펫 정보 저장
     await savePet(updatedPet);
     setPet(updatedPet); // UI 상태 업데이트
 
-    // 4. 퀴즈 화면 숨기기
+    // 6. 퀴즈 화면 숨기기
     setIsQuizVisible(false);
   };
   // 로딩 중 화면
