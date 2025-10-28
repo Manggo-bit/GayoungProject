@@ -1,4 +1,6 @@
-cat << EOF > README.md
+
+사이트: https://manggo-bit.github.io/GayoungProject/DragonsDilemma
+
 # 프로젝트: 드래곤즈 딜레마 (Dragon's Dilemma)
 
 > **'딜레마를 선택하라. 그것이 너의 운명을 결정할지니.'**
